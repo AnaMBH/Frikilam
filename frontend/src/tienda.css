@@ -1,0 +1,369 @@
+ /* Diseño general web */
+ @media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Apila los elementos en pantallas pequeñas */
+        padding: 20px;
+    }
+    }
+
+    /* Header */ 
+
+    body {
+    font-family: "Roboto condensed", sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    color: #ffffff;
+    }
+    
+    html {
+    height: 100%;
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background-color: #1a1a1a;
+    color: #ffffff
+    }
+    
+    .header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; /* Alinear verticalmente */
+    padding: 0 60px; /* Espaciado lateral */
+    background-color: #1a1a1a;
+    height: 120px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    max-width: 1280px;
+    margin: auto;
+    }
+
+    .header .nav .menu .item:hover{
+    cursor: pointer;
+    border-bottom: 2px solid;
+    }   
+        
+    .header .nav ul.social {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    }
+
+    .header .separator {
+    font-size: 25px;
+    color: grey;
+    }
+        
+    .header svg{
+    fill: white;
+    inline-size: 20px;
+    block-size: 20px;
+    }
+
+    .header .tools {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    }
+
+    /* Desplegable */
+    
+    /* Contenedor del menú */
+    .menu {
+    position: relative;
+    display: inline-block;
+    }
+
+    .menu a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    }
+    /* Dropdown oculto inicialmente */
+    .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 100px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    }
+
+ /* Estilos de los enlaces */
+    .dropdown a {
+    position: relative;
+    display: block;
+    padding: 10px 25px 10px 15px;
+    margin: 8px 0;
+    color: #000;
+    background: #6d6d6c; /* cuerpo amarillo */
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px 0 0 20px; /* punta redondeada solo en la izquierda */
+    transition: transform 0.2s, background 0.2s;
+    white-space: nowrap;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+  
+    .dropdown a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid #333; /* punta del lápiz */
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    }
+  
+    /* Cambia el color cuando pasas el cursor */
+    .dropdown a:hover {
+    background: #6d6d6c;
+    transform: scale(1.05);
+    }
+
+    /* Mostrar el dropdown al pasar el cursor */
+    .menu:hover .dropdown {
+    display: block;
+    }
+
+    /* Sub-dropdown (2do nivel) */
+    .submenu {
+    position: relative;
+    }
+  
+    .sub-dropdown {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #464646;
+    min-width: 160px;
+    padding: 5px 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+  
+    .submenu:hover .sub-dropdown {
+    display: block;
+    }
+  
+    /* Sub-sub-dropdown (3er nivel) */
+    .sub-submenu {
+    position: relative;
+    }
+  
+    .sub-sub-dropdown {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #777677;
+    min-width: 150px;
+    padding: 5px 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+  
+    .sub-submenu:hover .sub-sub-dropdown {
+    display: block;
+    }
+  
+    /* Enlaces de los niveles */
+    .dropdown a,
+    .sub-dropdown a,
+    .sub-sub-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    background: transparent;
+    color: white; 
+    text-decoration: none;
+    font-weight: normal;
+    border-radius: 3px;
+    }
+    
+    .dropdown a:hover,
+    .sub-dropdown a:hover,
+    .sub-sub-dropdown a:hover {
+    background: #3b3b3b;
+    }
+
+    /* Buscador */
+
+    /* Contenedor del buscador */
+    .search_cont {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 400px;
+    }
+    
+    /* Input de la barra de búsqueda */
+    #searchBox {
+    position: relative;
+    flex: 1;
+    
+    }
+
+    .search_box input {
+    width:450px;
+    padding: 12px 35px 12px 15px; /* espacio para la X */
+    font-size: 16px;
+    border-radius: 8px;
+    }
+
+    .clear {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #999;
+    display: none; /* se muestra cuando hay texto */
+    }
+    
+    
+
+    .search_box input:not(:placeholder-shown) + .clear {
+    display: block;
+    }
+
+    /* Carrito compa */
+
+    .nav {
+    display: flex;
+    justify-content: flex-end; /* alinea todo a la derecha */
+    align-items: center;
+    padding: 10px;
+    }
+
+    .carrito {
+    fill: white;
+    width: 30px;
+    height: 30px;
+    display: inline-block;  /* Asegura que no esté colapsado */
+    visibility: visible;    
+    opacity: 1;             
+    }
+
+    .carrito-icon {
+    fill: white;
+    }
+
+    /* Usuario */
+
+    .usuario {
+    fill: white;
+    width: 30px;
+    height: 30px;
+    display: inline-block;  /* Asegura que no esté colapsado */
+    visibility: visible;    
+    opacity: 1; 
+    margin-left: 10px;            
+    }
+
+    .usuario-icon {
+    fill: white;
+    }
+
+     /* Favorito */
+
+     .favorito {
+      fill: white;
+      width: 30px;
+      height: 30px;
+      display: inline-block;  /* Asegura que no esté colapsado */
+      visibility: visible;    
+      opacity: 1; 
+      margin-left: 10px;            
+      }
+  
+      .favorito-icon {
+      fill: white;
+      }
+
+    /* RRSS*/
+
+    .rrss.social {
+    display: flex;
+    gap: 10px; 
+    justify-content: center;
+    margin-top: 10px; 
+    right: 70%;
+    }
+
+    .social {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    font-size: 16px;
+    
+    align-items: center;
+    gap: 15px; 
+    margin-left: 30px;
+    } 
+        
+    .social .icon {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: right;   
+    }
+
+    .first-li svg:hover {
+    fill: blue;
+    }
+            
+    .second-lid svg:hover {
+    fill: rgb(255, 0, 119)
+    }
+        
+    .third-lid svg:hover {
+    fill: rgb(73, 200, 231)
+    }
+        
+    .fourth-lid svg:hover {
+    fill: red;
+    }
+            
+    .reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    }
+    
+    .reset-list li {
+    margin: 0;
+    padding: 0;
+    }
+
+    /* Imagen lápides*/
+
+    /* .lateral {
+    position: relative; Imagen derecha se posicione a la derecha
+    width: 100%; 
+    }
+    
+    .lateral img {
+    position: absolute;
+    }
+    
+    .lateral img:first-child {
+    left: 0; Imagen izquierda permanece en su lugar
+    }
+    
+    .lateral img:last-child {
+    right: 0; Imagen derecha se alinea al margen derecho
+    } */
+    
+
+    /* Imagenes pag. principal */
+    [ 'productos/camisa.jpg', 'productos/zapatos.jpg', 'accesorios/gorra.jpg' ]
