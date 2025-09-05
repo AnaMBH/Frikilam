@@ -70,3 +70,9 @@ Clona el repositorio:
 git clone https://github.com/AnaMBH/Frikilam.git
 cd Frikilam
 
+Levantar el backend (Node.js / Express)
+Entrar en la carpeta del backend
+
+Levantar el frontend (Next.js) 
+Entrar en la carpeta del backend
+
