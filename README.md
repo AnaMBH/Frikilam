@@ -37,4 +37,36 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 =======
 # Proyecto-final-curso
->>>>>>> 38c26c53ddd84a4632b548aab9607504f5a5acff
+# Frikilam – Tienda Online de Láminas Frikis
+
+Proyecto fullstack de una tienda online donde los usuarios pueden:
+
+- Crear una cuenta e iniciar sesión
+- Ver láminas en la página principal
+- Filtrar por categorías y usar el buscador
+- Guardar láminas en favoritos
+- Realizar compras
+
+---
+
+# Tecnologías usadas
+- **Frontend:** Next.js / React
+- **Backend:** Node.js con Express
+- **Base de datos:** MongoDB
+
+---
+
+# Requisitos previos
+- Node.js (18.x o superior recomendado)
+- npm o yarn
+- MongoDB (local o en la nube, por ejemplo [MongoDB Atlas](https://www.mongodb.com/atlas))
+
+---
+
+# Instalación
+
+Clona el repositorio:
+```bash
+git clone https://github.com/AnaMBH/Frikilam.git
+cd Frikilam
+
