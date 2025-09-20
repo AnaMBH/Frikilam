@@ -1,6 +1,6 @@
 import express from "express";
 import Usuario from "../models/usuario.js"; // Ajusta la ruta
-import { verifyToken } from "../middleware/auth.js"; // Middleware para verificar usuario logueado
+import { verifyToken } from "../../middleware/auth.js"; // Middleware para verificar usuario logueado
 
 const router = express.Router();
 

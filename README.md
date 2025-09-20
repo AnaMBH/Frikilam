@@ -36,43 +36,109 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 =======
-# Proyecto-final-curso
 # Frikilam – Tienda Online de Láminas Frikis
 
 Proyecto fullstack de una tienda online donde los usuarios pueden:
 
-- Crear una cuenta e iniciar sesión
-- Ver láminas en la página principal
-- Filtrar por categorías y usar el buscador
-- Guardar láminas en favoritos
-- Realizar compras
+- Crear una cuenta e iniciar sesión  
+- Ver láminas en la página principal  
+- Filtrar por categorías y usar el buscador  
+- Guardar láminas en favoritos  
+- Realizar compras  
+
+Este proyecto implementa un **frontend con Next.js** y un **backend con Node.js y Express**, utilizando **MongoDB** para la persistencia de datos y un **modelo API REST** para la comunicación entre ambas partes.
 
 ---
 
-# Tecnologías usadas
-- **Frontend:** Next.js / React
-- **Backend:** Node.js con Express
-- **Base de datos:** MongoDB
+## Tecnologías usadas
+
+- **Frontend:** Next.js / React  
+- **Backend:** Node.js / Express  
+- **Base de datos:** MongoDB / Mongoose  
+- **Otros:** dotenv, nodemon, cors, eslint, jest, supertest  
 
 ---
 
-# Requisitos previos
-- Node.js (18.x o superior recomendado)
-- npm o yarn
-- MongoDB (local o en la nube, por ejemplo [MongoDB Atlas](https://www.mongodb.com/atlas))
+## Requisitos previos
+
+- Node.js (18.x o superior recomendado)  
+- npm o yarn  
+- MongoDB (local o en la nube, por ejemplo [MongoDB Atlas](https://www.mongodb.com/atlas))  
 
 ---
 
-# Instalación
+## Instalación y configuración
 
-Clona el repositorio:
+### Clonar el repositorio
+
 ```bash
 git clone https://github.com/AnaMBH/Frikilam.git
 cd Frikilam
 
-Levantar el backend (Node.js / Express)
-Entrar en la carpeta del backend
+Backend
+cd backend
+npm install
+cp .env.example .env
+# Edita .env con tus variables de entorno:
+# MONGO_URI=<tu_URI_de_MongoDB>
+# PORT=5000
+npm run dev
 
-Levantar el frontend (Next.js) 
-Entrar en la carpeta del backend
+El backend correrá por defecto en http://localhost:5000
 
+Endpoints disponibles:
+
+GET /api/laminas → Listar todas las láminas
+
+GET /api/laminas/:id → Obtener lámina por ID
+
+POST /api/laminas → Crear nueva lámina
+
+GET /api/productos → Listar productos
+
+GET /api/users → Listar usuarios
+
+Frontend
+cd ../frontend
+npm install
+npm run dev
+
+
+El frontend correrá por defecto en http://localhost:3000
+
+Se conecta al backend mediante los endpoints definidos.
+
+Estructura del proyecto
+Frikilam/
+├─ backend/
+│  ├─ src/
+│  │  ├─ config/       # Configuración de la DB
+│  │  ├─ models/       # Modelos de MongoDB
+│  │  ├─ routes/       # Rutas de la API
+│  │  └─ index.js      # Entry point del backend
+├─ frontend/
+│  ├─ src/
+│  │  ├─ components/   # Componentes React
+│  │  ├─ pages/        # Páginas de Next.js
+│  │  └─ app/          # App principal de Next.js
+├─ .env.example
+├─ package.json
+└─ README.md
+
+Testeo
+cd backend
+npm test
+
+
+El backend incluye pruebas con Jest y Supertest para verificar que los endpoints /laminas, /productos y /users funcionan correctamente.
+
+Deployment
+Backend
+# Con Heroku o Render
+git push heroku main
+# Configura variables de entorno: MONGO_URI, PORT
+
+Frontend
+# Con Vercel
+vercel --prod
+# Configura la URL del backend en NEXT_PUBLIC_API_URL
