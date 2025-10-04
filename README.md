@@ -1,4 +1,4 @@
-# 🎨 Frikilam – Tienda Online de Láminas Frikis
+# Frikilam – Tienda Online de Láminas Frikis
 
 Frikilam es una tienda online fullstack donde los usuarios pueden:
 
