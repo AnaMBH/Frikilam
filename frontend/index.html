@@ -653,6 +653,142 @@
           updateFavoritesModal();
           document.getElementById('favorites-modal').classList.remove('hidden');
         }
+
+        // Gestión de usuario con MongoDB / Express (login, registro, perfil, logout)
+        let currentUserMongo = null;
+
+        function actualizarUsuarioMongoUI() {
+          const userNameDisplay = document.getElementById('user-name-display');
+          const logoutBtn = document.getElementById('logout-button');
+          const editBtn = document.getElementById('edit-profile-btn');
+
+          if (currentUserMongo) {
+            userNameDisplay.textContent = currentUserMongo.nombre || currentUserMongo.email;
+            logoutBtn.style.display = 'inline-block';
+            if (editBtn) editBtn.style.display = 'block';
+          } else {
+            userNameDisplay.textContent = '';
+            logoutBtn.style.display = 'none';
+            if (editBtn) editBtn.style.display = 'none';
+          }
+        }
+
+        // LOGIN
+        document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const email = document.getElementById('login-email').value;
+          const password = document.getElementById('login-password').value;
+
+          try {
+            const res = await fetch('http://localhost:3000/api/usuarios/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+              currentUser = data.usuario;
+              actualizarUsuarioUI();
+              alert(`Bienvenido ${currentUser.nombre || currentUser.email}`);
+              document.getElementById('user-modal').classList.add('hidden');
+            } else {
+              alert(data.message || 'Error al iniciar sesión');
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Error de conexión con el servidor');
+          }
+        });
+
+        // REGISTRO
+        document.getElementById('register-form')?.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const nombre = document.getElementById('register-name').value;
+          const email = document.getElementById('register-email').value;
+          const password = document.getElementById('register-password').value;
+
+          try {
+            const res = await fetch('http://localhost:3000/api/usuarios/register', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ nombre, email, password })
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+              currentUser = data.usuario;
+              actualizarUsuarioUI();
+              alert(`Cuenta creada para ${nombre}`);
+              document.getElementById('user-modal').classList.add('hidden');
+            } else {
+              alert(data.message || 'Error al registrarse');
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Error de conexión con el servidor');
+          }
+        });
+
+        // LOGOUT
+        document.getElementById('logout-button')?.addEventListener('click', () => {
+          currentUser = null;
+          actualizarUsuarioUI();
+          alert('Sesión cerrada');
+        });
+
+        // EDITAR PERFIL
+        document.getElementById('edit-profile-form')?.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const email = document.getElementById('edit-email').value;
+          const password = document.getElementById('edit-password').value;
+
+          try {
+            const res = await fetch('http://localhost:3000/api/usuarios/update', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: currentUser._id, email, password })
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+              currentUser = data.usuario;
+              actualizarUsuarioUI();
+              alert('Perfil actualizado');
+            } else {
+              alert(data.message || 'Error al actualizar');
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Error de conexión con el servidor');
+          }
+        });
+
+        // ELIMINAR CUENTA
+        document.getElementById('delete-account-btn')?.addEventListener('click', async () => {
+          if (!currentUser) return;
+          if (!confirm('¿Seguro que deseas eliminar tu cuenta?')) return;
+
+          try {
+            const res = await fetch(`http://localhost:3000/api/usuarios/delete/${currentUser._id}`, {
+              method: 'DELETE'
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+              currentUser = null;
+              actualizarUsuarioUI();
+              alert('Cuenta eliminada');
+            } else {
+              alert(data.message || 'Error al eliminar cuenta');
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Error de conexión con el servidor');
+          }
+        });
+
+
     </script>
 
 
