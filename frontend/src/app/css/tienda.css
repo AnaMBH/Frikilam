@@ -1,0 +1,455 @@
+/* Diseño general web */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Apila los elementos en pantallas pequeñas */
+    padding: 20px;
+  }
+}
+
+/* Header */
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 0;
+  padding: 0;
+  margin-top: 5px;
+  color: #ffffff;
+  background-image: url('/IMG/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+  font-size: 16px;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* Header principal (fijo) */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  background-color: #1a1a1a;
+  height: 120px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Iconos y social */
+.header svg {
+  fill: white;
+  width: 20px;
+  height: 20px;
+}
+
+/* Menú / Dropdown */
+.menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+/* Dropdown oculto inicialmente */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background: transparent;
+}
+
+/* Estilos de los enlaces dentro del dropdown */
+.dropdown a {
+  display: block;
+  padding: 10px 15px;
+  margin: 8px;
+  color: #fff;
+  background: rgba(109,109,108,0.95);
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: transform 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.dropdown a:hover {
+  transform: translateY(-2px);
+  background: #6d6d6c;
+}
+
+/* Mostrar el dropdown al pasar el cursor (solo en non-touch) */
+@media (hover: hover) and (pointer: fine) {
+  .menu:hover .dropdown { display: block; }
+}
+
+/* Sub-dropdown y sub-sub-dropdown */
+.sub-dropdown, .sub-sub-dropdown {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #464646;
+  min-width: 150px;
+  padding: 5px 0;
+  border-radius: 6px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+
+.submenu:hover .sub-dropdown,
+.sub-submenu:hover .sub-sub-dropdown {
+  display: block;
+}
+
+/* Busca usar la misma estructura en los tres niveles */
+.dropdown a, .sub-dropdown a, .sub-sub-dropdown a {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  background: transparent;
+  font-weight: normal;
+  border-radius: 3px;
+}
+
+.dropdown a:hover, .sub-dropdown a:hover, .sub-sub-dropdown a:hover {
+  background: #3b3b3b;
+}
+
+/* Buscador */
+.search_cont {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+  position: relative;
+}
+
+/* Unifica el id con el HTML: usa #searchInput (recomendado) */
+#searchInput {
+  flex: 1;
+  max-width: 100%;
+}
+
+.search_box input {
+  width: 100%;
+  max-width: 450px;
+  padding: 12px 35px 12px 15px; /* espacio para la X */
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  box-sizing: border-box;
+}
+
+/* Icono de limpiar */
+.clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+  color: #ccc;
+  display: none; /* se mostrará por JS cuando haya texto */
+}
+
+/* Usuario / icon-button */
+.icon-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* User modal */
+#user-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.user-modal-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 350px;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+/* Favoritos modal */
+#favorites-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  background: rgba(0,0,0,0.6);
+}
+
+#favorites-modal.hidden { display: none; }
+
+.favorites-modal-content {
+  background-color: #1e1e1e;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Galería de favoritos (única definición, sin duplicados) */
+#favorites-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+#favorites-gallery .image-container {
+  text-align: center;
+  background-color: rgb(110, 109, 109);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#favorites-gallery .gallery-image {
+  width: 150px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Carrito modal */
+.cart-modal {
+  position: fixed;
+  z-index: 2000;
+  inset: 5vh 5vw auto auto;
+  width: auto;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: auto;
+  display: none; /* se mostrará con remove .cart-hidden o con JS */
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.cart-modal.open { display: flex; }
+
+.cart-modal-content {
+  background-color: #2f4f4f;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 100vh;
+  overflow-y: auto;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Cart layout */
+.cart-body {
+  display: flex;
+  gap: 30px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.cart-items {
+  flex: 1 1 60%;
+  max-height: 300px;
+  overflow-y: auto;
+  border-right: 2px solid rgba(255,255,255,0.12);
+  padding-right: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.cart-item img {
+  width: 60px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Botón pagar */
+#pagar-btn {
+  background-color: #21867a;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#pagar-btn:hover { background-color: #1c5d54; }
+
+/* Payment form modal */
+#payment-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #dfdddd;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  max-width: 400px;
+  width: 90%;
+  z-index: 3000;
+}
+
+/* IMAGENES PRINCIPAL Y FILTRADO */
+#imageGallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 190px auto 60px;
+}
+
+/* Responsivo: menos columnas en pantallas pequeñas */
+@media (max-width: 1100px) {
+  #imageGallery { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 800px) {
+  #imageGallery { grid-template-columns: repeat(2, 1fr); margin-top: 160px; }
+}
+@media (max-width: 480px) {
+  #imageGallery { grid-template-columns: repeat(1, 1fr); margin-top: 140px; padding: 12px; }
+}
+
+#imageGallery img {
+  width: 180px;
+  height: 250px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* hover suave y pequeño para evitar romper layout */
+#imageGallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+/* Modal imagen */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4000;
+}
+.modal-content img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+}
+.close-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #474747;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Contenedor y precio */
+.image-container {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.price-tag {
+  margin-top: 5px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.add-to-cart-btn {
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #054363;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.add-to-cart-btn:hover {
+  background-color: #444647;
+}
+
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 3500;
+  display: none;
+}
+.modal-overlay.visible { display: block; }
