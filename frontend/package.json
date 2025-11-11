@@ -1,0 +1,11 @@
+{
+  "name": "frikilam-frontend",
+  "version": "1.0.0",
+  "description": "Frontend estático de Frikilam",
+  "scripts": {
+    "dev": "live-server ./public --port=3000"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
