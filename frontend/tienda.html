@@ -6,9 +6,11 @@
   <title>Frikilam - Tienda</title>
 
   <!-- CSS -->
-  <link href="tienda.css" rel="stylesheet" />
+  <link href="/css/globals.css" rel="stylesheet" />
+  <link href="/css/page.css" rel="stylesheet" />
+  <link href="/css/tienda.css" rel="stylesheet" />
 
-  <!-- Google Fonts (corregido) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
@@ -19,10 +21,11 @@
 <body>
   <header>
     <div class="header">
-      <a href="">
-        <img src="IMG/LOGO.png" alt="logo" class="logo" />
+      <a href="/">
+        <img src="/IMG/LOGO.png" alt="logo" class="logo" />
       </a>
 
+      <!-- FILTRAR -->
       <nav class="desplegable">
         <ul>
           <li class="menu">
@@ -32,13 +35,13 @@
               <div class="sub-submenu">
                 <a href="#">Anime</a>
                 <div class="sub-sub-dropdown">
-                  <a href="#">Ataque a los Titanes</a>
-                  <a href="#">Death Note</a>
-                  <a href="#">Demon Slayer</a>
-                  <a href="#">Dragon Ball</a>
-                  <a href="#">Jujutsu Kaisen</a>
-                  <a href="#">Naruto</a>
-                  <a href="#">One Piece</a>
+                  <a href="#" class="subcategory" data-path="Anime/Ataque_a_los_titanes">Ataque a los Titanes</a>
+                  <a href="#" class="subcategory" data-path="Anime/Death_note">Death Note</a>
+                  <a href="#" class="subcategory" data-path="Anime/Demon_Slayer">Demon Slayer</a>
+                  <a href="#" class="subcategory" data-path="Anime/Dragon_Ball">Dragon Ball</a>
+                  <a href="#" class="subcategory" data-path="Anime/Jujutsu_Kaise">Jujutsu Kaisen</a>
+                  <a href="#" class="subcategory" data-path="Anime/Naruto">Naruto</a>
+                  <a href="#" class="subcategory" data-path="Anime/One_Piece">One Piece</a>
                 </div>
               </div>
 
@@ -46,9 +49,9 @@
               <div class="sub-submenu">
                 <a href="#">DC</a>
                 <div class="sub-sub-dropdown">
-                  <a href="#">Arrow</a>
-                  <a href="#">Batman</a>
-                  <a href="#">Wonder Woman</a>
+                  <a href="#" class="subcategory" data-path="DC/Arrow">Arrow</a>
+                  <a href="#" class="subcategory" data-path="DC/Batman">Batman</a>
+                  <a href="#" class="subcategory" data-path="DC/Wonder_woman">Wonder Woman</a>
                 </div>
               </div>
 
@@ -56,99 +59,120 @@
               <div class="sub-submenu">
                 <a href="#">Marvel</a>
                 <div class="sub-sub-dropdown">
-                  <a href="#">Ant-Man</a>
-                  <a href="#">Avengers</a>
-                  <a href="#">Black Panther</a>
-                  <a href="#">Black Widow</a>
-                  <a href="#">Capitán America</a>
-                  <a href="#">Deadpool</a>
-                  <a href="#">Doctor Strange</a>
-                  <a href="#">Guardianes de la Galaxia</a>
-                  <a href="#">Iron Man</a>
-                  <a href="#">Spiderman</a>
-                  <a href="#">Thor</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Ant-man_&_the-wasp">Ant-Man</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Avengers">Avengers</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Black_panter">Black Panther</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Black_widow">Black Widow</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Capitan_America">Capitán América</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Deadpool">Deadpool</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Doctor_strange">Doctor Strange</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Guardianes_de_la_Galaxia">Guardianes de la Galaxia</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Iron_man">Iron Man</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Spiderman">Spiderman</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Thor">Thor</a>
                 </div>
               </div>
-
             </div>
           </li>
         </ul>
       </nav>
 
+      <!-- BUSCADOR -->
       <div class="search_cont">
         <div class="search_box">
-          <input id="searchBox" type="text" placeholder="¡Busca aquí tu lámina!">
+          <input id="searchInput" type="text" placeholder="¡Busca aquí tu lámina!">
           <span class="clear" id="clearIcon" style="display:none;">×</span>
         </div>
       </div>
 
+      <!-- ICONOS -->
       <nav class="nav">
         <ul class="menu">
-          <li class="carrito">
-            <!-- icono carrito -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="24" height="24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM7.16 14.26l.03-.32L7.9 12h8.45c.75 0 1.41-.41 1.75-1.03l3.24-5.88a.998.998 0 0 0-.87-1.49H5.21L4.27 2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7.42c-.14 0-.25-.11-.26-.24z"/></svg>
+          <li>
+            <button id="favorites-button" class="icon-button" title="Favoritos">❤️</button>
           </li>
-
-          <li class="usuario">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="30" height="30" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          <li>
+            <button id="cart-icon" class="icon-button">🛒 <span id="cart-count">0</span></button>
           </li>
-
-          <li class="favorito">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg>
+          <li>
+            <button id="user-button" class="icon-button">👤</button>
+            <span id="user-name-display" style="color:white;margin-left:5px;"></span>
+            <button id="logout-button" style="display:none;">Cerrar sesión</button>
           </li>
-        </ul>
-
-        <ul class="social">
-          <li class="first-li"><a href="#" target="_blank">FB</a></li>
-          <li class="second-lid"><a href="#" target="_blank">IG</a></li>
-          <li class="third-lid"><a href="#" target="_blank">X</a></li>
-          <li class="fourth-lid"><a href="#" target="_blank">YT</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Galería principal -->
+  <!-- GALERÍA -->
   <main>
-    <!-- Contenedor que usa el script (id = "galeria") -->
-    <div id="galeria" class="gallery-container"></div>
+    <div id="imageGallery" class="gallery-container"></div>
   </main>
 
-  <!-- Si prefieres centralizar toda la lógica JS en main.js, incluye ../js/main.js aquí.
-       Por ahora incluimos un script pequeño para cargar imagenes desde imagenes.json -->
+  <!-- MODALES -->
+  <div id="favorites-modal" class="hidden">
+    <div class="modal-content">
+      <span class="close-button" id="close-favorites-modal">&times;</span>
+      <h2>Favoritos</h2>
+      <div id="favorites-gallery"></div>
+    </div>
+  </div>
+
+  <div id="cart-modal" class="cart-hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Carrito</h2>
+      <div id="cart-items"></div>
+      <p id="cart-total"></p>
+      <p id="iva"></p>
+      <p id="envio"></p>
+      <p id="total-a-pagar"></p>
+
+      <form id="payment-form">
+        <input id="nombre" name="nombre" placeholder="Nombre completo" required><br>
+        <input id="email" name="email" type="email" placeholder="Email" required><br>
+        <input id="telefono" name="telefono" placeholder="Teléfono" required><br>
+        <input id="direccion" name="direccion" placeholder="Dirección" required><br>
+        <input id="ciudad" name="ciudad" placeholder="Ciudad" required><br>
+        <input id="provincia" name="provincia" placeholder="Provincia" required><br>
+        <input id="Codigo-postal" name="Codigo-postal" placeholder="Código Postal" required><br>
+        <input id="tarjeta" name="tarjeta" placeholder="Número de tarjeta" required><br>
+        <input id="exp" name="exp" placeholder="MM/AA" required>
+        <span id="exp-error" style="display:none;color:red;">Fecha inválida</span><br>
+        <input id="cvc" name="cvc" placeholder="CVC" required><br>
+        <button type="submit">Pagar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="user-modal" class="hidden">
+    <div class="user-modal-content"></div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script src="/js/main.js" defer></script>
+
+  <!-- BÚSQUEDA (filtra imágenes) -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const contenedor = document.getElementById('galeria');
-      if (!contenedor) return;
-
-      contenedor.style.display = 'flex';
-      contenedor.style.flexWrap = 'wrap';
-      contenedor.style.gap = '16px';
-
-      // Fetch JSON (colócalo en la raíz pública: /imagenes.json)
-      fetch('/imagenes.json')
-        .then(res => {
-          if (!res.ok) throw new Error('No se pudo cargar imagenes.json: ' + res.status);
-          return res.json();
-        })
-        .then(data => {
-          // data es un array de objetos { nombre, url }
-          data.forEach((item, index) => {
-            // usa la URL proporcionada en el JSON (ya contiene /IMG/...)
-            const src = item.url || item; // tolerancia: si algún elemento fuera solo string
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = item.nombre ? `Imagen ${item.nombre}` : `Imagen ${index}`;
-            img.style.width = '200px';
-            img.style.height = 'auto';
-            img.loading = 'lazy';
-            contenedor.appendChild(img);
-          });
-        })
-        .catch(err => {
-          console.error('Error cargando imágenes:', err);
-          contenedor.innerHTML = '<p style="color:salmon">Error cargando la galería.</p>';
-        });
+    const input = document.getElementById('searchInput');
+    const clearIcon = document.getElementById('clearIcon');
+    input?.addEventListener('input', () => {
+      const val = input.value.toLowerCase();
+      document.querySelectorAll('#imageGallery .image-container').forEach(img => {
+        img.style.display = img.textContent.toLowerCase().includes(val) ? 'block' : 'none';
+      });
+      clearIcon.style.display = val ? 'inline' : 'none';
+    });
+    clearIcon?.addEventListener('click', () => {
+      input.value = '';
+      clearIcon.style.display = 'none';
+      document.querySelectorAll('#imageGallery .image-container').forEach(img => img.style.display = 'block');
+    });
+    document.querySelectorAll('.subcategory').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        window.app?.showImages([link.dataset.path]);
+      });
     });
   </script>
 </body>

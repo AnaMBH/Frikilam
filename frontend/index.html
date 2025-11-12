@@ -5,34 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Frikilam</title>
 
-  <!-- CSS: globals primero, luego page/tienda -->
-  <link rel="stylesheet" href="../css/globals.css" />
-  <link rel="stylesheet" href="../css/page.css" />
-  <link rel="stylesheet" href="../css/tienda.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/globals.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+  <link rel="stylesheet" href="/css/tienda.css" />
+
+  <!-- JS -->
+  <script src="/js/main.js" defer></script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" crossorigin="anonymous" />
 </head>
+
 <body>
   <header>
     <div class="header">
-      <a href="/">
-        <!-- AVISO: usar ruta pública (public/ se sirve desde la raíz) -->
-        <img src="/IMG/LOGO.png" alt="logo" class="logo" />
-      </a>
+      <a href="/"><img src="/IMG/LOGO.png" alt="logo" class="logo" /></a>
 
-      <!-- DESPLEGABLE -->
+      <!-- FILTRAR -->
       <nav class="desplegable">
         <ul>
           <li class="menu">
             <a href="#">Filtrar</a>
             <div class="dropdown">
-              <!-- Subcategorías -->
+              <!-- Anime -->
               <div class="sub-submenu">
                 <a href="#">Anime</a>
                 <div class="sub-sub-dropdown">
@@ -45,7 +46,7 @@
                   <a href="#" class="subcategory" data-path="Anime/One_Piece">One Piece</a>
                 </div>
               </div>
-
+              <!-- DC -->
               <div class="sub-submenu">
                 <a href="#">DC</a>
                 <div class="sub-sub-dropdown">
@@ -54,11 +55,11 @@
                   <a href="#" class="subcategory" data-path="DC/Wonder_woman">Wonder Woman</a>
                 </div>
               </div>
-
+              <!-- Marvel -->
               <div class="sub-submenu">
                 <a href="#">Marvel</a>
                 <div class="sub-sub-dropdown">
-                  <a href="#" class="subcategory" data-path="Marvel/Ant-man_&_the-wasp">Ant-Man & the Wasp</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Ant-man_&_the-wasp">Ant-Man</a>
                   <a href="#" class="subcategory" data-path="Marvel/Avengers">Avengers</a>
                   <a href="#" class="subcategory" data-path="Marvel/Black_panter">Black Panther</a>
                   <a href="#" class="subcategory" data-path="Marvel/Black_widow">Black Widow</a>
@@ -71,7 +72,6 @@
                   <a href="#" class="subcategory" data-path="Marvel/Thor">Thor</a>
                 </div>
               </div>
-
             </div>
           </li>
         </ul>
@@ -79,63 +79,97 @@
 
       <!-- BUSCADOR -->
       <div class="search_cont">
-        <div class="search_box" style="position: relative;">
-          <input type="text" id="searchInput" placeholder="Buscar..." />
+        <div class="search_box">
+          <input id="searchInput" type="text" placeholder="Buscar..." />
           <span id="clearIcon" class="clear" style="display:none;">×</span>
         </div>
       </div>
 
-      <!-- USUARIO / FAVORITO / CARRITO -->
+      <!-- ICONOS DE CABECERA -->
       <nav class="nav">
         <ul class="menu">
-          <li class="usuario">
-            <button class="icon-button" id="user-button">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="30" height="30" viewBox="0 0 24 24">
-                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-              </svg>
-              <span id="user-name-display" style="color: white; margin-left: 8px; font-size: 14px;"></span>
-            </button>
-            <button id="logout-button" style="display: none; margin-left: 10px; background: none; border: none; color: white; cursor: pointer;">Cerrar sesión</button>
-          </li>
-
-          <li class="favorito">
-            <button class="icon-button" id="favorites-button" title="Favoritos">
-              <!-- corazón SVG -->
-              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="white">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-                        C2 6.5 3.5 5 5.5 5
-                        C6.74 5 7.97 5.54 8.91 6.46
-                        L12 9.55l3.09-3.09
-                        C16.03 5.54 17.26 5 18.5 5
-                        C20.5 5 22 6.5 22 8.5
-                        C22 12.28 18.6 15.36 13.45 19.54L12 21.35z"/>
-              </svg>
-            </button>
-          </li>
-
-          <li class="carrito">
-            <button id="cart-icon" style="background: none; border: none; color: yellow; font-size: 18px;">
-              🛒 <span id="cart-count">0</span>
-            </button>
+          <li><button id="favorites-button" class="icon-button" title="Favoritos">❤️</button></li>
+          <li><button id="cart-icon" class="icon-button">🛒 <span id="cart-count">0</span></button></li>
+          <li>
+            <button id="user-button" class="icon-button">👤</button>
+            <span id="user-name-display" style="color:white;margin-left:5px;"></span>
+            <button id="logout-button" style="display:none;">Cerrar sesión</button>
           </li>
         </ul>
       </nav>
-
-      <!-- MODALES (user, favorites, cart, payment) -->
-      <div id="user-modal" class="hidden"> ... </div>
-      <div id="favorites-modal" class="hidden"> ... </div>
-      <div id="cart-modal" class="cart-modal cart-hidden"> ... </div>
-
     </div>
   </header>
 
-  <!-- IMAGENES WEB PRINCIPAL -->
-  <div id="imageGallery"></div>
+  <!-- GALERÍA PRINCIPAL -->
+  <main>
+    <div id="imageGallery" class="gallery-container"></div>
+  </main>
 
-  <!-- Overlay modal -->
+  <!-- MODAL FAVORITOS -->
+  <div id="favorites-modal" class="hidden">
+    <div class="modal-content">
+      <span class="close-button" id="close-favorites-modal" aria-label="Cerrar">&times;</span>
+      <h2>Favoritos</h2>
+      <div id="favorites-gallery"></div>
+    </div>
+  </div>
+
+  <!-- MODAL CARRITO -->
+  <div id="cart-modal" class="cart-hidden">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Cerrar">&times;</span>
+      <h2>Carrito</h2>
+      <div id="cart-items"></div>
+      <p id="cart-total"></p>
+      <p id="iva"></p>
+      <p id="envio"></p>
+      <p id="total-a-pagar"></p>
+      <button id="checkout-button">Pagar</button>
+    </div>
+  </div>
+
+  <!-- MODAL CHECKOUT -->
+  <div id="checkout-form" class="hidden">
+    <div class="modal-content">
+      <span class="close-button" id="close-checkout" aria-label="Cerrar">&times;</span>
+      <h2>Datos de Facturación</h2>
+      <form id="payment-form">
+        <input id="nombre" name="nombre" placeholder="Nombre completo" required><br>
+        <input id="email" name="email" type="email" placeholder="Email" required><br>
+        <input id="telefono" name="telefono" placeholder="Teléfono" required><br>
+        <input id="direccion" name="direccion" placeholder="Dirección" required><br>
+        <input id="ciudad" name="ciudad" placeholder="Ciudad" required><br>
+        <input id="provincia" name="provincia" placeholder="Provincia" required><br>
+        <input id="codigo-postal" name="codigo-postal" placeholder="Código Postal" required><br>
+        <input id="tarjeta" name="tarjeta" placeholder="Número de tarjeta" required><br>
+        <input id="exp" name="exp" placeholder="MM/AA" required>
+        <span id="exp-error" style="display:none;color:red;">Fecha inválida</span><br>
+        <input id="cvc" name="cvc" placeholder="CVC" required><br>
+        <button type="submit">Pagar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- OVERLAY -->
   <div id="modal-overlay" class="modal-overlay hidden"></div>
 
-  <!-- Gestión usuarios (small admin form) -->
+  <!-- MODAL USUARIO -->
+  <div id="user-modal" class="hidden">
+    <div class="user-modal-content" style="background:white; color:blue; padding:20px; border-radius:8px; width:300px; max-width:90%; margin:auto; position:relative;">
+      <span id="close-user-modal" class="close-button" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;" aria-label="Cerrar">&times;</span>
+      <h2 style="text-align:center;">Iniciar Sesión</h2>
+      <input type="email" id="login-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
+      <input type="password" id="login-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
+      <button id="login-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">Iniciar sesión</button>
+      <hr>
+      <h2 style="text-align:center;">Registrar Usuario</h2>
+      <input type="email" id="register-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
+      <input type="password" id="register-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
+      <button id="register-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">Registrar</button>
+    </div>
+  </div>
+
+  <!-- GESTIÓN DE USUARIOS -->
   <section id="gestionUsuarios" style="margin: 20px;">
     <h2>Gestión de Usuarios</h2>
     <form id="formCrearUsuario">
@@ -151,7 +185,119 @@
     <ul id="listaUsuarios"></ul>
   </section>
 
-  <!-- SCRIPT: apunta a main.js -->
-  <script src="../js/main.js" defer></script>
+  <!-- SCRIPT -->
+  <script>
+    // --- MODAL USUARIO ---
+    const openUserModal = document.getElementById('user-button');
+    const userModal = document.getElementById('user-modal');
+    const closeUserModal = document.getElementById('close-user-modal');
+
+    openUserModal.addEventListener('click', () => userModal.classList.remove('hidden'));
+    closeUserModal.addEventListener('click', () => userModal.classList.add('hidden'));
+    window.addEventListener('click', e => {
+      if(e.target === userModal) userModal.classList.add('hidden');
+    });
+
+    // --- LOGIN ---
+    document.getElementById('login-btn').addEventListener('click', e => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      if(email && password){
+        alert(`Has iniciado sesión con: ${email}`);
+        userModal.classList.add('hidden');
+        document.getElementById('user-name-display').textContent = email;
+        document.getElementById('logout-button').style.display = 'inline';
+      } else alert("Completa todos los campos");
+    });
+
+    // --- REGISTRO ---
+    document.getElementById('register-btn').addEventListener('click', e => {
+      e.preventDefault();
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      if(email && password){
+        alert(`Usuario registrado: ${email}`);
+        userModal.classList.add('hidden');
+        document.getElementById('user-name-display').textContent = email;
+        document.getElementById('logout-button').style.display = 'inline';
+      } else alert("Completa todos los campos");
+    });
+
+    // --- LOGOUT ---
+    document.getElementById('logout-button').addEventListener('click', () => {
+      document.getElementById('user-name-display').textContent = '';
+      document.getElementById('logout-button').style.display = 'none';
+      alert("Has cerrado sesión");
+    });
+
+    // --- BUSCADOR ---
+    const input = document.getElementById('searchInput');
+    const clearIcon = document.getElementById('clearIcon');
+    input?.addEventListener('input', () => {
+      const val = input.value.toLowerCase();
+      document.querySelectorAll('#imageGallery .image-container').forEach(img => {
+        img.style.display = img.textContent.toLowerCase().includes(val) ? 'block' : 'none';
+      });
+      clearIcon.style.display = val ? 'inline' : 'none';
+    });
+    clearIcon?.addEventListener('click', () => {
+      input.value = '';
+      clearIcon.style.display = 'none';
+      document.querySelectorAll('#imageGallery .image-container').forEach(img => img.style.display = 'block');
+    });
+
+    document.querySelectorAll('.subcategory').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        window.app?.showImages([link.dataset.path]);
+      });
+    });
+
+    // --- FORMULARIO CREAR USUARIO ---
+    document.getElementById('formCrearUsuario').addEventListener('submit', e => {
+      e.preventDefault();
+      const nombre = document.getElementById('usuario-nombre').value;
+      const email = document.getElementById('usuario-email').value;
+      const password = document.getElementById('usuario-password').value;
+      const rol = document.getElementById('usuario-rol').value;
+
+      const li = document.createElement('li');
+      li.textContent = `${nombre} - ${email} - ${rol}`;
+      document.getElementById('listaUsuarios').appendChild(li);
+
+      e.target.reset();
+    });
+
+    // --- GALERÍA PRINCIPAL ---
+    const galleryContainer = document.getElementById('imageGallery');
+
+    async function loadImages() {
+      try {
+        const res = await fetch("/imagenes.json"); // Asegúrate de que el JSON esté en public/
+        const images = await res.json();
+
+        galleryContainer.innerHTML = ""; // Limpia la galería antes de mostrar imágenes
+
+        images.forEach(img => {
+          const div = document.createElement('div');
+          div.classList.add('image-container');
+
+          div.innerHTML = `
+            <img src="${img.url}" alt="${img.nombre}" />
+            <p>${img.nombre}</p>
+          `;
+          galleryContainer.appendChild(div);
+        });
+      } catch (error) {
+        console.error("Error al cargar imágenes:", error);
+        galleryContainer.innerHTML = "<p>No se pudieron cargar las imágenes.</p>";
+      }
+    }
+
+    // Llamar a la función al cargar la página
+    loadImages();
+
+  </script>
 </body>
 </html>
