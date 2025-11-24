@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frikilam - Tienda</title>
+
+  <!-- CSS -->
+  <link href="/css/globals.css" rel="stylesheet" />
+  <link href="/css/page.css" rel="stylesheet" />
+  <link href="/css/tienda.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" crossorigin="anonymous" />
+</head>
+<body>
+  <header>
+    <div class="header">
+      <a href="/">
+        <img src="/IMG/LOGO.png" alt="logo" class="logo" />
+      </a>
+
+      <!-- FILTRAR -->
+      <nav class="desplegable">
+        <ul>
+          <li class="menu">
+            <a href="#">Filtrar</a>
+            <div class="dropdown">
+              <!-- Anime -->
+              <div class="sub-submenu">
+                <a href="#">Anime</a>
+                <div class="sub-sub-dropdown">
+                  <a href="#" class="subcategory" data-path="Anime/Ataque_a_los_titanes">Ataque a los Titanes</a>
+                  <a href="#" class="subcategory" data-path="Anime/Death_note">Death Note</a>
+                  <a href="#" class="subcategory" data-path="Anime/Demon_Slayer">Demon Slayer</a>
+                  <a href="#" class="subcategory" data-path="Anime/Dragon_Ball">Dragon Ball</a>
+                  <a href="#" class="subcategory" data-path="Anime/Jujutsu_Kaise">Jujutsu Kaisen</a>
+                  <a href="#" class="subcategory" data-path="Anime/Naruto">Naruto</a>
+                  <a href="#" class="subcategory" data-path="Anime/One_Piece">One Piece</a>
+                </div>
+              </div>
+
+              <!-- DC -->
+              <div class="sub-submenu">
+                <a href="#">DC</a>
+                <div class="sub-sub-dropdown">
+                  <a href="#" class="subcategory" data-path="DC/Arrow">Arrow</a>
+                  <a href="#" class="subcategory" data-path="DC/Batman">Batman</a>
+                  <a href="#" class="subcategory" data-path="DC/Wonder_woman">Wonder Woman</a>
+                </div>
+              </div>
+
+              <!-- Marvel -->
+              <div class="sub-submenu">
+                <a href="#">Marvel</a>
+                <div class="sub-sub-dropdown">
+                  <a href="#" class="subcategory" data-path="Marvel/Ant-man_&_the-wasp">Ant-Man</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Avengers">Avengers</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Black_panter">Black Panther</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Black_widow">Black Widow</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Capitan_America">Capitán América</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Deadpool">Deadpool</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Doctor_strange">Doctor Strange</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Guardianes_de_la_Galaxia">Guardianes de la Galaxia</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Iron_man">Iron Man</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Spiderman">Spiderman</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Thor">Thor</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- BUSCADOR -->
+      <div class="search_cont">
+        <div class="search_box">
+          <input id="searchInput" type="text" placeholder="¡Busca aquí tu lámina!">
+          <span class="clear" id="clearIcon" style="display:none;">×</span>
+        </div>
+      </div>
+
+      <!-- ICONOS -->
+      <nav class="nav">
+        <ul class="menu">
+          <li>
+            <button id="favorites-button" class="icon-button" title="Favoritos">❤️</button>
+          </li>
+          <li>
+            <button id="cart-icon" class="icon-button">🛒 <span id="cart-count">0</span></button>
+          </li>
+          <li>
+            <button id="user-button" class="icon-button">👤</button>
+            <span id="user-name-display" style="color:white;margin-left:5px;"></span>
+            <button id="logout-button" style="display:none;">Cerrar sesión</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- GALERÍA -->
+  <main>
+    <div id="imageGallery" class="gallery-container"></div>
+  </main>
+
+  <!-- MODALES -->
+  <div id="favorites-modal" class="hidden">
+    <div class="modal-content">
+      <span class="close-button" id="close-favorites-modal">&times;</span>
+      <h2>Favoritos</h2>
+      <div id="favorites-gallery"></div>
+    </div>
+  </div>
+
+  <div id="cart-modal" class="cart-hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Carrito</h2>
+      <div id="cart-items"></div>
+      <p id="cart-total"></p>
+      <p id="iva"></p>
+      <p id="envio"></p>
+      <p id="total-a-pagar"></p>
+
+      <form id="payment-form">
+        <input id="nombre" name="nombre" placeholder="Nombre completo" required><br>
+        <input id="email" name="email" type="email" placeholder="Email" required><br>
+        <input id="telefono" name="telefono" placeholder="Teléfono" required><br>
+        <input id="direccion" name="direccion" placeholder="Dirección" required><br>
+        <input id="ciudad" name="ciudad" placeholder="Ciudad" required><br>
+        <input id="provincia" name="provincia" placeholder="Provincia" required><br>
+        <input id="Codigo-postal" name="Codigo-postal" placeholder="Código Postal" required><br>
+        <input id="tarjeta" name="tarjeta" placeholder="Número de tarjeta" required><br>
+        <input id="exp" name="exp" placeholder="MM/AA" required>
+        <span id="exp-error" style="display:none;color:red;">Fecha inválida</span><br>
+        <input id="cvc" name="cvc" placeholder="CVC" required><br>
+        <button type="submit">Pagar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="user-modal" class="hidden">
+    <div class="user-modal-content"></div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script src="/js/main.js" defer></script>
+
+
+</body>
+</html>
