@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frikilam</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/globals.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+  <link rel="stylesheet" href="/css/tienda.css" />
+
+  <!-- JS -->
+  <script src="/js/main.js" defer></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" crossorigin="anonymous" />
+</head>
+
+<body>
+  <header>
+    <div class="header">
+      <a href="/"><img src="/IMG/LOGO.png" alt="logo" class="logo" /></a>
+
+      <!-- FILTRAR -->
+      <nav class="desplegable">
+        <ul>
+          <li class="menu">
+            <a href="#">Filtrar</a>
+            <div class="dropdown">
+              <!-- Anime -->
+              <div class="sub-submenu">
+                <a href="#">Anime</a>
+                <div class="sub-sub-dropdown">
+                  <a href="#" class="subcategory" data-path="Anime/Ataque_a_los_titanes">Ataque a los Titanes</a>
+                  <a href="#" class="subcategory" data-path="Anime/Death_note">Death Note</a>
+                  <a href="#" class="subcategory" data-path="Anime/Demon_Slayer">Demon Slayer</a>
+                  <a href="#" class="subcategory" data-path="Anime/Dragon_Ball">Dragon Ball</a>
+                  <a href="#" class="subcategory" data-path="Anime/Jujutsu_Kaise">Jujutsu Kaisen</a>
+                  <a href="#" class="subcategory" data-path="Anime/Naruto">Naruto</a>
+                  <a href="#" class="subcategory" data-path="Anime/One_Piece">One Piece</a>
+                </div>
+              </div>
+              <!-- DC -->
+              <div class="sub-submenu">
+                <a href="#">DC</a>
+                <div class="sub-sub-dropdown">
+                  <a href="#" class="subcategory" data-path="DC/Arrow">Arrow</a>
+                  <a href="#" class="subcategory" data-path="DC/Batman">Batman</a>
+                  <a href="#" class="subcategory" data-path="DC/Wonder_woman">Wonder Woman</a>
+                </div>
+              </div>
+              <!-- Marvel -->
+              <div class="sub-submenu">
+                <a href="#">Marvel</a>
+                <div class="sub-sub-dropdown">
+                  <a href="#" class="subcategory" data-path="Marvel/Ant-man_&_the-wasp">Ant-Man</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Avengers">Avengers</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Black_panter">Black Panther</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Black_widow">Black Widow</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Capitan_America">Capitán América</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Deadpool">Deadpool</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Doctor_strange">Doctor Strange</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Guardianes_de_la_Galaxia">Guardianes de la Galaxia</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Iron_man">Iron Man</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Spiderman">Spiderman</a>
+                  <a href="#" class="subcategory" data-path="Marvel/Thor">Thor</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- BUSCADOR -->
+      <div class="search_cont">
+        <div class="search_box">
+          <input id="searchInput" type="text" placeholder="Buscar..." />
+          <span id="clearIcon" class="clear" style="display:none;">×</span>
+        </div>
+      </div>
+
+      <!-- ICONOS DE CABECERA -->
+      <nav class="nav">
+        <ul class="menu">
+          <li><button id="favorites-button" class="icon-button" title="Favoritos">❤️</button></li>
+          <li><button id="cart-icon" class="icon-button">🛒 <span id="cart-count">0</span></button></li>
+          <li>
+            <button id="user-button" class="icon-button">👤</button>
+            <span id="user-name-display" style="color:white;margin-left:5px;"></span>
+            <button id="logout-button" style="display:none;">Cerrar sesión</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- GALERÍA PRINCIPAL -->
+  <main>
+    <div id="imageGallery" class="gallery-container"></div>
+  </main>
+
+  <!-- MODAL FAVORITOS -->
+  <div id="favorites-modal" class="hidden">
+    <div class="modal-content">
+      <span class="close-button" id="close-favorites-modal" aria-label="Cerrar">&times;</span>
+      <h2>Favoritos</h2>
+      <div id="favorites-gallery"></div>
+    </div>
+  </div>
+
+  <!-- MODAL CARRITO -->
+  <div id="cart-modal" class="cart-hidden">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Cerrar">&times;</span>
+      <h2>Carrito</h2>
+      <div id="cart-items"></div>
+      <p id="cart-total"></p>
+      <p id="iva"></p>
+      <p id="envio"></p>
+      <p id="total-a-pagar"></p>
+      <button id="checkout-button">Pagar</button>
+    </div>
+  </div>
+
+  <!-- MODAL CHECKOUT -->
+  <div id="checkout-form" class="hidden">
+    <div class="modal-content">
+      <span class="close-button" id="close-checkout" aria-label="Cerrar">&times;</span>
+      <h2>Datos de Facturación</h2>
+      <form id="payment-form">
+        <input id="nombre" name="nombre" placeholder="Nombre completo" required><br>
+        <input id="email" name="email" type="email" placeholder="Email" required><br>
+        <input id="telefono" name="telefono" placeholder="Teléfono" required><br>
+        <input id="direccion" name="direccion" placeholder="Dirección" required><br>
+        <input id="ciudad" name="ciudad" placeholder="Ciudad" required><br>
+        <input id="provincia" name="provincia" placeholder="Provincia" required><br>
+        <input id="codigo-postal" name="codigo-postal" placeholder="Código Postal" required><br>
+        <input id="tarjeta" name="tarjeta" placeholder="Número de tarjeta" required><br>
+        <input id="exp" name="exp" placeholder="MM/AA" required>
+        <span id="exp-error" style="display:none;color:red;">Fecha inválida</span><br>
+        <input id="cvc" name="cvc" placeholder="CVC" required><br>
+        <button type="submit">Pagar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- OVERLAY -->
+  <div id="modal-overlay" class="modal-overlay hidden"></div>
+
+  <!-- MODAL USUARIO -->
+  <div id="user-modal" class="hidden">
+    <div class="user-modal-content" style="background:white; color:blue; padding:20px; border-radius:8px; width:300px; max-width:90%; margin:auto; position:relative;">
+      <span id="close-user-modal" class="close-button" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;" aria-label="Cerrar">&times;</span>
+      <h2 style="text-align:center;">Iniciar Sesión</h2>
+      <input type="email" id="login-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
+      <input type="password" id="login-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
+      <button id="login-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">Iniciar sesión</button>
+      <hr>
+      <h2 style="text-align:center;">Registrar Usuario</h2>
+      <input type="email" id="register-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
+      <input type="password" id="register-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
+      <button id="register-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">Registrar</button>
+    </div>
+  </div>
+
+  <!-- GESTIÓN DE USUARIOS -->
+  <section id="gestionUsuarios" style="margin: 20px;">
+    <h2>Gestión de Usuarios</h2>
+    <form id="formCrearUsuario">
+      <input type="text" id="usuario-nombre" placeholder="Nombre" required>
+      <input type="email" id="usuario-email" placeholder="Email" required>
+      <input type="password" id="usuario-password" placeholder="Password" required>
+      <select id="usuario-rol">
+        <option value="usuario">Usuario</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button type="submit">Crear Usuario</button>
+    </form>
+    <ul id="listaUsuarios"></ul>
+  </section>
+
+  <!-- SCRIPT -->
+  <script>
+    // --- MODAL USUARIO ---
+    const openUserModal = document.getElementById('user-button');
+    const userModal = document.getElementById('user-modal');
+    const closeUserModal = document.getElementById('close-user-modal');
+
+    openUserModal.addEventListener('click', () => userModal.classList.remove('hidden'));
+    closeUserModal.addEventListener('click', () => userModal.classList.add('hidden'));
+    window.addEventListener('click', e => {
+      if(e.target === userModal) userModal.classList.add('hidden');
+    });
+
+    // --- LOGIN ---
+    document.getElementById('login-btn').addEventListener('click', e => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      if(email && password){
+        alert(`Has iniciado sesión con: ${email}`);
+        userModal.classList.add('hidden');
+        document.getElementById('user-name-display').textContent = email;
+        document.getElementById('logout-button').style.display = 'inline';
+      } else alert("Completa todos los campos");
+    });
+
+    // --- REGISTRO ---
+    document.getElementById('register-btn').addEventListener('click', e => {
+      e.preventDefault();
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      if(email && password){
+        alert(`Usuario registrado: ${email}`);
+        userModal.classList.add('hidden');
+        document.getElementById('user-name-display').textContent = email;
+        document.getElementById('logout-button').style.display = 'inline';
+      } else alert("Completa todos los campos");
+    });
+
+    // --- LOGOUT ---
+    document.getElementById('logout-button').addEventListener('click', () => {
+      document.getElementById('user-name-display').textContent = '';
+      document.getElementById('logout-button').style.display = 'none';
+      alert("Has cerrado sesión");
+    });
+
+    // --- BUSCADOR ---
+    const input = document.getElementById('searchInput');
+    const clearIcon = document.getElementById('clearIcon');
+    input?.addEventListener('input', () => {
+      const val = input.value.toLowerCase();
+      document.querySelectorAll('#imageGallery .image-container').forEach(img => {
+        img.style.display = img.textContent.toLowerCase().includes(val) ? 'block' : 'none';
+      });
+      clearIcon.style.display = val ? 'inline' : 'none';
+    });
+    clearIcon?.addEventListener('click', () => {
+      input.value = '';
+      clearIcon.style.display = 'none';
+      document.querySelectorAll('#imageGallery .image-container').forEach(img => img.style.display = 'block');
+    });
+
+    document.querySelectorAll('.subcategory').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        window.app?.showImages([link.dataset.path]);
+      });
+    });
+
+    // --- FORMULARIO CREAR USUARIO ---
+    document.getElementById('formCrearUsuario').addEventListener('submit', e => {
+      e.preventDefault();
+      const nombre = document.getElementById('usuario-nombre').value;
+      const email = document.getElementById('usuario-email').value;
+      const password = document.getElementById('usuario-password').value;
+      const rol = document.getElementById('usuario-rol').value;
+
+      const li = document.createElement('li');
+      li.textContent = `${nombre} - ${email} - ${rol}`;
+      document.getElementById('listaUsuarios').appendChild(li);
+
+      e.target.reset();
+    });
+
+    // --- GALERÍA PRINCIPAL ---
+    const galleryContainer = document.getElementById('imageGallery');
+
+    async function loadImages() {
+      try {
+        const res = await fetch("/imagenes.json"); // Asegúrate de que el JSON esté en public/
+        const images = await res.json();
+
+        galleryContainer.innerHTML = ""; // Limpia la galería antes de mostrar imágenes
+
+        images.forEach(img => {
+          const div = document.createElement('div');
+          div.classList.add('image-container');
+
+          div.innerHTML = `
+            <img src="${img.url}" alt="${img.nombre}" />
+            <p>${img.nombre}</p>
+          `;
+          galleryContainer.appendChild(div);
+        });
+      } catch (error) {
+        console.error("Error al cargar imágenes:", error);
+        galleryContainer.innerHTML = "<p>No se pudieron cargar las imágenes.</p>";
+      }
+    }
+
+    // Llamar a la función al cargar la página
+    loadImages();
+
+  </script>
+</body>
+</html>
