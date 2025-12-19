@@ -1,4 +1,6 @@
-/* Diseño general web */
+
+/* DISEÑO GENERAL / RESPONSIVO   */
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column; /* Apila los elementos en pantallas pequeñas */
@@ -6,7 +8,6 @@
   }
 }
 
-/* Header */
 body {
   font-family: "Roboto Condensed", sans-serif;
   margin: 0;
@@ -30,7 +31,9 @@ html {
   box-sizing: border-box;
 }
 
-/* Header principal (fijo) */
+
+/* HEADER / MENÚ / ICONOS        */
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -49,7 +52,6 @@ html {
   box-sizing: border-box;
 }
 
-/* Iconos y social */
 .header svg {
   fill: white;
   width: 20px;
@@ -75,7 +77,7 @@ html {
   font-size: 18px;
 }
 
-/* Dropdown oculto inicialmente */
+/* Dropdown */
 .dropdown {
   display: none;
   position: absolute;
@@ -87,7 +89,6 @@ html {
   background: transparent;
 }
 
-/* Estilos de los enlaces dentro del dropdown */
 .dropdown a {
   display: block;
   padding: 10px 15px;
@@ -107,12 +108,10 @@ html {
   background: #6d6d6c;
 }
 
-/* Mostrar el dropdown al pasar el cursor (solo en non-touch) */
 @media (hover: hover) and (pointer: fine) {
   .menu:hover .dropdown { display: block; }
 }
 
-/* Sub-dropdown y sub-sub-dropdown */
 .sub-dropdown, .sub-sub-dropdown {
   display: none;
   position: absolute;
@@ -130,7 +129,6 @@ html {
   display: block;
 }
 
-/* Busca usar la misma estructura en los tres niveles */
 .dropdown a, .sub-dropdown a, .sub-sub-dropdown a {
   display: block;
   padding: 10px 15px;
@@ -144,7 +142,9 @@ html {
   background: #3b3b3b;
 }
 
-/* Buscador */
+
+/* BUSCADOR                      */
+
 .search_cont {
   display: flex;
   align-items: center;
@@ -153,7 +153,6 @@ html {
   position: relative;
 }
 
-/* Unifica el id con el HTML: usa #searchInput (recomendado) */
 #searchInput {
   flex: 1;
   max-width: 100%;
@@ -162,7 +161,7 @@ html {
 .search_box input {
   width: 100%;
   max-width: 450px;
-  padding: 12px 35px 12px 15px; /* espacio para la X */
+  padding: 12px 35px 12px 15px; 
   font-size: 16px;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.15);
@@ -171,7 +170,6 @@ html {
   box-sizing: border-box;
 }
 
-/* Icono de limpiar */
 .clear {
   position: absolute;
   right: 12px;
@@ -180,14 +178,16 @@ html {
   cursor: pointer;
   font-size: 20px;
   color: #ccc;
-  display: none; /* se mostrará por JS cuando haya texto */
+  display: none;
 }
 
-/* Usuario / icon-button */
+
+/* USUARIO / LOGIN / REGISTRO  */
+
 .icon-button {
   background: none;
   border: none;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 24px;
   display: flex;
   align-items: center;
@@ -197,44 +197,78 @@ html {
   line-height: 1;
 }
 
-/* User modal */
 #user-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 2500;
 }
 
-.modal-content .close-button {
-  color: #011831;
+#user-modal.hidden {
+  display: none;
 }
-
 
 .user-modal-content {
-  background: #94bfef;
-  padding: 25px 30px;
-  border-radius: 10px;
-  width: 350px;
+  background: #00070ff3;
+  padding: 30px 25px;
+  border-radius: 12px;
+  width: 360px;
+  max-width: 90%;
+  color: #3d3d3d;
+  box-shadow: 0 10px 25px rgba(46, 46, 46, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   position: relative;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  font-size: 16px;
 }
 
-/* Botón cerrar modal de usuario */
+#user-modal input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(5, 5, 5, 0.2);
+  background: rgba(20, 20, 20, 0.233);
+  color: #363636;
+  font-size: 16px;
+}
+
+#user-modal input::placeholder {
+  color: #3f3f3f;
+}
+
+#user-modal button {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  background-color: #a0a1a3;
+  color: #1a1a1a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#user-modal button:hover {
+  background-color: #454749;
+}
+
 #close-user-modal {
   position: absolute;
   top: 10px;
   right: 15px;
   font-size: 24px;
   font-weight: bold;
-  color: #007bff;
+  color: #272727;
   cursor: pointer;
+  background: transparent;
+  border: none;
 }
 
 
-/* Favoritos modal */
+/* FAVORITOS   */
+
 #favorites-modal {
   position: fixed;
   inset: 0;
@@ -242,14 +276,14 @@ html {
   justify-content: center;
   align-items: center;
   z-index: 2000;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.85); /* Fondo oscuro semitransparente */
 }
 
 #favorites-modal.hidden { display: none; }
 
 .favorites-modal-content {
-  background-color: #1e1e1e;
-  color: white;
+  background-color: #343434; /* Fondo del modal */
+  color: #bfbdbd;
   border-radius: 10px;
   padding: 20px;
   width: 90%;
@@ -259,31 +293,71 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
-/* Galería de favoritos (única definición, sin duplicados) */
+/* Botón de cerrar modal */
+#favorites-modal .close-favorites {
+  position: absolute;
+  top: 30px;
+  right: 2px; 
+  background: #0c0c0c;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+
+/* Galería */
 #favorites-gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
+  width: 100%;
 }
 
+/* Contenedor de cada imagen */
 #favorites-gallery .image-container {
   text-align: center;
-  background-color: rgb(110, 109, 109);
-  padding: 10px;
+  background-color: #f7f5f5;
+  padding: 5px;
   border-radius: 8px;
+  position: relative;
 }
 
+/* Imagen */
 #favorites-gallery .gallery-image {
-  width: 150px;
-  height: 300px;
+  width: 100%;
+  height: 250px; 
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
-/* Carrito modal */
+/* X para eliminar favoritos */
+#favorites-gallery .remove-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #2f2e2e; 
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 50%; 
+  font-weight: bold;
+}
+
+
+
+
+/* CARRITO */
+
+/* Estilo general del modal de carrito */
 .cart-modal {
   position: fixed;
   z-index: 2000;
@@ -292,14 +366,28 @@ html {
   max-width: 900px;
   max-height: 90vh;
   overflow: auto;
-  display: none; /* se mostrará con remove .cart-hidden o con JS */
+  display: none;
   justify-content: center;
   align-items: center;
   font-family: "Roboto Condensed", sans-serif;
 }
 
-.cart-modal.open { display: flex; }
+.cart-hidden {
+    display: none;  
+}
 
+/* Fondo oscuro detrás del modal */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+  z-index: 1000; /* Asegura que esté detrás del modal */
+}
+
+/* Contenido del modal */
 .cart-modal-content {
   background-color: #2f4f4f;
   padding: 30px;
@@ -312,7 +400,6 @@ html {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Cart layout */
 .cart-body {
   display: flex;
   gap: 30px;
@@ -344,7 +431,16 @@ html {
   border-radius: 4px;
 }
 
-/* Botón pagar */
+/* Mensaje cuando el carrito está vacío */
+.cart-items-empty {
+  text-align: center;
+  color: #ddd;
+  font-size: 18px;
+  padding: 20px 0;
+  font-weight: bold;
+}
+
+/* Estilos del botón de pagar */
 #pagar-btn {
   background-color: #21867a;
   color: white;
@@ -355,24 +451,109 @@ html {
   cursor: pointer;
 }
 
-#pagar-btn:hover { background-color: #1c5d54; }
-
-/* Payment form modal */
-#payment-form {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  background: #dfdddd;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  max-width: 400px;
-  width: 90%;
-  z-index: 3000;
+#pagar-btn:hover { 
+  background-color: #1c5d54; 
 }
 
-/* IMAGENES PRINCIPAL Y FILTRADO */
+/* Modal de pago */
+.cart-content,
+.payment-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  max-width: 400px;
+  margin: 50px auto;
+  z-index: 1010;
+}
+
+button.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+button.btn-pay {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.btn-pay:hover {
+  background-color: #218838;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Botones y formularios del modal de pago */
+#payment-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+}
+
+#payment-modal .payment-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  margin: 20px auto;
+  max-width: 400px;
+  z-index: 1010;
+}
+
+/* Estilos de los inputs del formulario de pago */
+form input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+form label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #218838;
+}
+
+
+/* GALERÍA / IMÁGENES            */
+
 #imageGallery {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -383,7 +564,6 @@ html {
   margin: 190px auto 60px;
 }
 
-/* Responsivo: menos columnas en pantallas pequeñas */
 @media (max-width: 1100px) {
   #imageGallery { grid-template-columns: repeat(4, 1fr); }
 }
@@ -404,14 +584,12 @@ html {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* hover suave y pequeño para evitar romper layout */
 #imageGallery img:hover {
   transform: scale(1.2);
   box-shadow: 0 10px 16px rgba(0, 0, 0, 0.25);
   z-index: 10;
 }
 
-/* Modal imagen */
 .image-modal {
   position: fixed;
   inset: 0;
@@ -421,11 +599,13 @@ html {
   align-items: center;
   z-index: 4000;
 }
+
 .modal-content img {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 10px;
 }
+
 .close-button {
   position: absolute;
   top: -10px;
@@ -438,26 +618,11 @@ html {
   cursor: pointer;
 }
 
-/* MODALES   */
-  .hidden {
+
+/* MODALES / OVERLAYS             */
+
+.hidden {
   display: none;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 400px;
-  margin: 100px auto;
-  position: relative;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
 }
 
 .modal-overlay {
@@ -470,22 +635,25 @@ html {
   display: none;
   z-index: 10;
 }
+
 .modal-overlay.active {
   display: block;
 }
 
 
+/* PRODUCTOS / CARRO / BOTONES   */
 
-/* Contenedor y precio */
 .image-container {
   text-align: center;
   margin-bottom: 10px;
 }
+
 .price-tag {
   margin-top: 5px;
   font-weight: bold;
   color: #ffffff;
 }
+
 .add-to-cart-btn {
   margin-top: 8px;
   padding: 6px 12px;
@@ -495,16 +663,24 @@ html {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .add-to-cart-btn:hover {
   background-color: #444647;
 }
 
-/* Overlay */
-.modal-overlay {
+
+/* MODALES DE PAGO / CHECKOUT     */
+
+#payment-form {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 3500;
-  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #dfdddd;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  max-width: 400px;
+  width: 90%;
+  z-index: 3000;
 }
-.modal-overlay.visible { display: block; }

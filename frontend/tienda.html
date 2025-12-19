@@ -21,9 +21,7 @@
 <body>
   <header>
     <div class="header">
-      <a href="/">
-        <img src="/IMG/LOGO.png" alt="logo" class="logo" />
-      </a>
+      <a href="/"><img src="/IMG/LOGO.png" alt="logo" class="logo" /></a>
 
       <!-- FILTRAR -->
       <nav class="desplegable">
@@ -145,35 +143,32 @@
     </div>
   </div>
 
+  <!-- MODAL USUARIO COMPLETO -->
   <div id="user-modal" class="hidden">
-    <div class="user-modal-content"></div>
+    <button id="close-user-modal">Cerrar</button>
+
+    <h2>Iniciar sesión</h2>
+    <input type="email" id="login-email" placeholder="Correo">
+    <input type="password" id="login-password" placeholder="Contraseña">
+    <button id="login-btn">Login</button>
+    <!-- Enlace de olvidar contraseña -->
+    <p id="forgot-password" class="forgot-password-text">¿Has olvidado tu contraseña?</p>
+
+    <h2>Registrar</h2>
+    <input type="email" id="register-email" placeholder="Correo">
+    <input type="password" id="register-password" placeholder="Contraseña">
+    <button id="register-btn">Registrar</button>
+
+    <h2>Modificar cuenta</h2>
+    <input type="email" id="update-email" placeholder="Nuevo correo">
+    <input type="password" id="update-password" placeholder="Nueva contraseña">
+    <button id="update-user-btn">Actualizar</button>
+
+    <h2>Eliminar cuenta</h2>
+    <button id="delete-user-btn">Eliminar cuenta</button>
   </div>
 
   <!-- SCRIPT -->
   <script src="/js/main.js" defer></script>
-
-  <!-- BÚSQUEDA (filtra imágenes) -->
-  <script>
-    const input = document.getElementById('searchInput');
-    const clearIcon = document.getElementById('clearIcon');
-    input?.addEventListener('input', () => {
-      const val = input.value.toLowerCase();
-      document.querySelectorAll('#imageGallery .image-container').forEach(img => {
-        img.style.display = img.textContent.toLowerCase().includes(val) ? 'block' : 'none';
-      });
-      clearIcon.style.display = val ? 'inline' : 'none';
-    });
-    clearIcon?.addEventListener('click', () => {
-      input.value = '';
-      clearIcon.style.display = 'none';
-      document.querySelectorAll('#imageGallery .image-container').forEach(img => img.style.display = 'block');
-    });
-    document.querySelectorAll('.subcategory').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        window.app?.showImages([link.dataset.path]);
-      });
-    });
-  </script>
 </body>
 </html>

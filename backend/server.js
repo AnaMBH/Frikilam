@@ -22,11 +22,11 @@ app.use("/api/usuarios", userRoutes);
 app.use("/api/favoritos", favoritosRoutes);
 
 app.get("/", (req, res) => {
-  res.send("API funcionando 🚀");
+  res.send("API funcionando");
 });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
-  console.log(`✅ Servidor corriendo en http://localhost:${PORT}`)
+  console.log(`Servidor corriendo en http://localhost:${PORT}`)
 );
 

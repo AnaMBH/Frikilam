@@ -10,9 +10,6 @@
   <link rel="stylesheet" href="/css/page.css" />
   <link rel="stylesheet" href="/css/tienda.css" />
 
-  <!-- JS -->
-  <script src="/js/main.js" defer></script>
-
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +17,10 @@
 
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" crossorigin="anonymous" />
-</head>
 
+  <!-- JS principal -->
+  <script src="/js/main.js" defer></script>
+</head>
 <body>
   <header>
     <div class="header">
@@ -91,10 +90,14 @@
           <li><button id="favorites-button" class="icon-button" title="Favoritos">❤️</button></li>
           <li><button id="cart-icon" class="icon-button">🛒 <span id="cart-count">0</span></button></li>
           <li>
-            <button id="user-button" class="icon-button">👤</button>
-            <span id="user-name-display" style="color:white;margin-left:5px;"></span>
+            <button id="user-button" class="icon-button user-icon">
+              👤
+              <span id="user-name-display"></span>
+            </button>
             <button id="logout-button" style="display:none;">Cerrar sesión</button>
           </li>
+
+
         </ul>
       </nav>
     </div>
@@ -106,27 +109,70 @@
   </main>
 
   <!-- MODAL FAVORITOS -->
-  <div id="favorites-modal" class="hidden">
-    <div class="modal-content">
-      <span class="close-button" id="close-favorites-modal" aria-label="Cerrar">&times;</span>
-      <h2>Favoritos</h2>
-      <div id="favorites-gallery"></div>
+<div id="favorites-modal" class="hidden">
+  <div class="favorites-modal-content">
+    <button id="close-favorites" class="close-favorites">✖</button>
+    <h2>Mis Favoritos</h2>
+    <div id="favorites-gallery">
     </div>
   </div>
+</div>
+  
+<!-- Botón de carrito con contador -->
+<button id="cart-icon">
+    🛒
+    <span id="cart-item-count">0</span> <!-- Aquí aparecerá el número de artículos -->
+</button>
 
-  <!-- MODAL CARRITO -->
-  <div id="cart-modal" class="cart-hidden">
-    <div class="modal-content">
-      <span class="close-button" aria-label="Cerrar">&times;</span>
-      <h2>Carrito</h2>
-      <div id="cart-items"></div>
-      <p id="cart-total"></p>
-      <p id="iva"></p>
-      <p id="envio"></p>
-      <p id="total-a-pagar"></p>
-      <button id="checkout-button">Pagar</button>
+<!-- Modal del carrito -->
+<div id="cart-modal" class="cart-hidden">
+    <div class="cart-overlay"></div>
+    <div class="cart-content">
+        <button class="close-button">✖</button>
+        <div id="cart-items"></div>
+        <div id="cart-total"></div>
+        <div id="iva"></div>
+        <div id="envio"></div>
+        <div id="total-a-pagar"></div>
+        <button id="pay-button" class="btn-pay">Pagar</button>
     </div>
-  </div>
+</div>
+
+
+<!-- Modal de Pago -->
+<div id="payment-modal" class="cart-hidden">
+    <div class="cart-overlay"></div>
+    <div class="payment-content">
+        <button class="close-button">✖</button>
+        <h2>Detalles de Pago</h2>
+        <form id="payment-form">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" required />
+
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" required />
+
+            <label for="city">Ciudad:</label>
+            <input type="text" id="city" required />
+
+            <label for="province">Provincia:</label>
+            <input type="text" id="province" required />
+
+            <label for="postal-code">Código Postal:</label>
+            <input type="text" id="postal-code" maxlength="5" required />
+
+            <label for="card-number">Número de tarjeta:</label>
+            <input type="text" id="card-number" maxlength="16" required />
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" maxlength="3" required />
+
+            <button type="submit" class="btn-pay">Confirmar pago</button>
+        </form>
+    </div>
+</div>
+
+
 
   <!-- MODAL CHECKOUT -->
   <div id="checkout-form" class="hidden">
@@ -153,24 +199,93 @@
   <!-- OVERLAY -->
   <div id="modal-overlay" class="modal-overlay hidden"></div>
 
-  <!-- MODAL USUARIO -->
-  <div id="user-modal" class="hidden">
-    <div class="user-modal-content" style="background:white; color:blue; padding:20px; border-radius:8px; width:300px; max-width:90%; margin:auto; position:relative;">
-      <span id="close-user-modal" class="close-button" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;" aria-label="Cerrar">&times;</span>
+<!-- MODAL USUARIO -->
+<div id="user-modal" class="hidden">
+  <div class="user-modal-content" style="background:white; color:rgb(56, 56, 56); padding:20px; border-radius:8px; width:300px; max-width:90%; margin:auto; position:relative;">
+    
+    <span id="close-user-modal" class="close-button" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;" aria-label="Cerrar">&times;</span>
+
+    <!-- ============================== -->
+    <!--      SECCIÓN LOGIN (NO LOGUEADO) -->
+    <!-- ============================== -->
+    <div id="login-section">
       <h2 style="text-align:center;">Iniciar Sesión</h2>
+
       <input type="email" id="login-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
       <input type="password" id="login-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
-      <button id="login-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">Iniciar sesión</button>
+
+      <button id="login-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
+        Iniciar sesión
+      </button>
+
+      <!-- BOTÓN PARA RECUPERAR CONTRASEÑA -->
+      <button id="forgot-password-btn" 
+        style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#f0f0f0;">
+        ¿Olvidaste tu contraseña?
+      </button>
+    </div>
+
+    <!-- ============================== -->
+    <!--      SECCIÓN REGISTRO (NO LOGUEADO) -->
+    <!-- ============================== -->
+    <div id="register-section">
       <hr>
+
       <h2 style="text-align:center;">Registrar Usuario</h2>
+
       <input type="email" id="register-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
       <input type="password" id="register-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
-      <button id="register-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">Registrar</button>
+
+      <button id="register-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
+        Registrar
+      </button>
     </div>
+
+    <!-- ============================== -->
+    <!--     SECCIÓN LOGUEADO  -->
+    <!-- ============================== -->
+    <div id="user-options-section" hidden>
+
+      <h2 style="text-align:center;">Opciones de Cuenta</h2>
+
+      <button id="logout-inside-modal" 
+              style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#676666; color:white;">
+        Cerrar sesión
+      </button>
+
+      <button id="open-update-section" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
+        Modificar usuario
+      </button>
+
+      <button id="delete-user-btn" 
+              style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#4b0101; color:white;">
+        Eliminar usuario
+      </button>
+
+    </div>
+
+    <!-- ============================== -->
+    <!--  SECCIÓN MODIFICAR USUARIO  -->
+    <!-- ============================== -->
+    <section id="gestionUsuarios" hidden style="margin-top: 20px;">
+
+      <h2>Modificar Usuario</h2>
+
+      <input type="email" id="update-email" placeholder="Nuevo correo" style="width:100%; margin:5px 0; padding:5px;">
+      <input type="password" id="update-password" placeholder="Nueva contraseña" style="width:100%; margin:5px 0; padding:5px;">
+
+      <button id="update-user-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
+        Guardar cambios
+      </button>
+
+    </section>
+
   </div>
+</div>
+
 
   <!-- GESTIÓN DE USUARIOS -->
-  <section id="gestionUsuarios" style="margin: 20px;">
+  <section id="gestionUsuarios" hidden style="margin: 20px;">
     <h2>Gestión de Usuarios</h2>
     <form id="formCrearUsuario">
       <input type="text" id="usuario-nombre" placeholder="Nombre" required>
@@ -180,124 +295,64 @@
         <option value="usuario">Usuario</option>
         <option value="admin">Admin</option>
       </select>
-      <button type="submit">Crear Usuario</button>
+      <button type="submit">Crear Usuario</button> 
     </form>
-    <ul id="listaUsuarios"></ul>
   </section>
 
-  <!-- SCRIPT -->
-  <script>
-    // --- MODAL USUARIO ---
-    const openUserModal = document.getElementById('user-button');
-    const userModal = document.getElementById('user-modal');
-    const closeUserModal = document.getElementById('close-user-modal');
+    <!-- BOTÓN PARA RECUPERAR CONTRASEÑA -->
+    <button id="forgot-password-btn" 
+      style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#f0f0f0;">
+      ¿Olvidaste tu contraseña?
+    </button>
 
-    openUserModal.addEventListener('click', () => userModal.classList.remove('hidden'));
-    closeUserModal.addEventListener('click', () => userModal.classList.add('hidden'));
-    window.addEventListener('click', e => {
-      if(e.target === userModal) userModal.classList.add('hidden');
-    });
+    <hr>
 
-    // --- LOGIN ---
-    document.getElementById('login-btn').addEventListener('click', e => {
-      e.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      if(email && password){
-        alert(`Has iniciado sesión con: ${email}`);
-        userModal.classList.add('hidden');
-        document.getElementById('user-name-display').textContent = email;
-        document.getElementById('logout-button').style.display = 'inline';
-      } else alert("Completa todos los campos");
-    });
+    <h2 style="text-align:center;">Registrar Usuario</h2>
+    <input type="email" id="register-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
+    <input type="password" id="register-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
 
-    // --- REGISTRO ---
-    document.getElementById('register-btn').addEventListener('click', e => {
-      e.preventDefault();
-      const email = document.getElementById('register-email').value;
-      const password = document.getElementById('register-password').value;
-      if(email && password){
-        alert(`Usuario registrado: ${email}`);
-        userModal.classList.add('hidden');
-        document.getElementById('user-name-display').textContent = email;
-        document.getElementById('logout-button').style.display = 'inline';
-      } else alert("Completa todos los campos");
-    });
+    <button id="register-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
+      Registrar
+    </button>
+  
+  </div>
+</div>
 
-    // --- LOGOUT ---
-    document.getElementById('logout-button').addEventListener('click', () => {
-      document.getElementById('user-name-display').textContent = '';
-      document.getElementById('logout-button').style.display = 'none';
-      alert("Has cerrado sesión");
-    });
+<script>
+  // Función al hacer clic en "¿Olvidaste tu contraseña?"
+ document.getElementById("forgot-password-btn").addEventListener("click", function() {
+    // Abrir modal de recuperación
+    document.getElementById("forgot-modal").classList.remove("hidden");
+});
+</script>
 
-    // --- BUSCADOR ---
-    const input = document.getElementById('searchInput');
-    const clearIcon = document.getElementById('clearIcon');
-    input?.addEventListener('input', () => {
-      const val = input.value.toLowerCase();
-      document.querySelectorAll('#imageGallery .image-container').forEach(img => {
-        img.style.display = img.textContent.toLowerCase().includes(val) ? 'block' : 'none';
-      });
-      clearIcon.style.display = val ? 'inline' : 'none';
-    });
-    clearIcon?.addEventListener('click', () => {
-      input.value = '';
-      clearIcon.style.display = 'none';
-      document.querySelectorAll('#imageGallery .image-container').forEach(img => img.style.display = 'block');
-    });
+<!-- MODAL RECUPERAR CONTRASEÑA -->
+<div id="forgot-modal" class="hidden forgot-modal">
+  <div style="background:white; padding:20px; border-radius:8px; width:300px;">
+    <h3>Recuperar contraseña</h3>
+    <input type="email" id="forgot-email" placeholder="Ingresa tu correo" 
+           style="width:100%; padding:5px; margin:5px 0;">
+    <input type="password" id="new-password" placeholder="Nueva contraseña" 
+           style="width:100%; padding:5px; margin:5px 0;">
+    <button id="send-recovery-btn" style="width:100%; padding:5px; margin-top:5px;">
+      Cambiar contraseña
+    </button>
+    <button onclick="closeForgotModal()" style="width:100%; padding:5px; margin-top:5px;">
+      Cancelar
+    </button>
+  </div>
+</div>
 
-    document.querySelectorAll('.subcategory').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        window.app?.showImages([link.dataset.path]);
-      });
-    });
 
-    // --- FORMULARIO CREAR USUARIO ---
-    document.getElementById('formCrearUsuario').addEventListener('submit', e => {
-      e.preventDefault();
-      const nombre = document.getElementById('usuario-nombre').value;
-      const email = document.getElementById('usuario-email').value;
-      const password = document.getElementById('usuario-password').value;
-      const rol = document.getElementById('usuario-rol').value;
 
-      const li = document.createElement('li');
-      li.textContent = `${nombre} - ${email} - ${rol}`;
-      document.getElementById('listaUsuarios').appendChild(li);
 
-      e.target.reset();
-    });
 
-    // --- GALERÍA PRINCIPAL ---
-    const galleryContainer = document.getElementById('imageGallery');
 
-    async function loadImages() {
-      try {
-        const res = await fetch("/imagenes.json"); // Asegúrate de que el JSON esté en public/
-        const images = await res.json();
 
-        galleryContainer.innerHTML = ""; // Limpia la galería antes de mostrar imágenes
 
-        images.forEach(img => {
-          const div = document.createElement('div');
-          div.classList.add('image-container');
 
-          div.innerHTML = `
-            <img src="${img.url}" alt="${img.nombre}" />
-            <p>${img.nombre}</p>
-          `;
-          galleryContainer.appendChild(div);
-        });
-      } catch (error) {
-        console.error("Error al cargar imágenes:", error);
-        galleryContainer.innerHTML = "<p>No se pudieron cargar las imágenes.</p>";
-      }
-    }
 
-    // Llamar a la función al cargar la página
-    loadImages();
 
-  </script>
+  
 </body>
 </html>

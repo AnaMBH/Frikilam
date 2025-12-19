@@ -1,8 +1,16 @@
 import express from "express";
-import User from "../models/User.js";
+import {
+  registerUser,
+  loginUser,
+  forgotPassword,
+  resetPassword
+} from "../controllers/userController.js";
+
+import User from "../models/User.js"; // Para tus rutas CRUD existentes
 
 const router = express.Router();
 
+// RUTAS CRUD EXISTENTES
 // GET - obtener usuario por ID
 router.get("/:id", async (req, res) => {
   try {
@@ -49,5 +57,12 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-export default router;
 
+//  RUTAS DE AUTENTICACIÓN Y RECUPERACIÓN
+
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
+
+export default router;
