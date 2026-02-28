@@ -118,95 +118,106 @@
   </div>
 </div>
   
-<!-- Botón de carrito con contador -->
-<button id="cart-icon">
-    🛒
-    <span id="cart-item-count">0</span> <!-- Aquí aparecerá el número de artículos -->
-</button>
+<!-- MODAL CARRITO -->
+<div id="cart-modal">
+  <div class="cart-overlay"></div>
 
-<!-- Modal del carrito -->
-<div id="cart-modal" class="cart-hidden">
-    <div class="cart-overlay"></div>
-    <div class="cart-content">
-        <button class="close-button">✖</button>
-        <div id="cart-items"></div>
-        <div id="cart-total"></div>
-        <div id="iva"></div>
-        <div id="envio"></div>
-        <div id="total-a-pagar"></div>
-        <button id="pay-button" class="btn-pay">Pagar</button>
-    </div>
+  <div class="cart-content">
+    <button class="close-button">✖</button>
+
+    <div id="cart-items"></div>
+    <div id="total-a-pagar"></div>
+
+    <button id="pay-button">Pagar</button>
+  </div>
 </div>
 
+<!-- MODAL PAGO -->
+<div id="payment-modal">
+  <div class="cart-overlay"></div>
 
-<!-- Modal de Pago -->
-<div id="payment-modal" class="cart-hidden">
-    <div class="cart-overlay"></div>
-    <div class="payment-content">
-        <button class="close-button">✖</button>
-        <h2>Detalles de Pago</h2>
-        <form id="payment-form">
-            <label for="name">Nombre:</label>
-            <input type="text" id="name" required />
+  <div class="payment-content">
+    <button class="close-button">✖</button>
 
-            <label for="address">Dirección:</label>
-            <input type="text" id="address" required />
+    <h2>Detalles de Pago</h2>
 
-            <label for="city">Ciudad:</label>
-            <input type="text" id="city" required />
+    <form id="payment-form">
+      <label>Nombre completo</label>
+      <input type="text" required>
 
-            <label for="province">Provincia:</label>
-            <input type="text" id="province" required />
+      <label>Dirección</label>
+      <input type="text" required>
 
-            <label for="postal-code">Código Postal:</label>
-            <input type="text" id="postal-code" maxlength="5" required />
+      <label>Ciudad</label>
+      <input type="text" required>
 
-            <label for="card-number">Número de tarjeta:</label>
-            <input type="text" id="card-number" maxlength="16" required />
+      <label>Provincia</label>
+      <input type="text" required>
 
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" maxlength="3" required />
+      <label>Código Postal</label>
+      <input 
+        type="text"
+        inputmode="numeric"
+        pattern="[0-9]{5}"
+        maxlength="5"
+        placeholder="12345"
+        required
+      >
 
-            <button type="submit" class="btn-pay">Confirmar pago</button>
-        </form>
-    </div>
+      <label>Número de tarjeta</label>
+      <input
+        type="text"
+        inputmode="numeric"
+        pattern="[0-9]{16}"
+        maxlength="16"
+        placeholder="1234123412341234"
+        required
+      >
+
+
+      <label>CVV</label>
+      <input
+        type="password"
+        inputmode="numeric"
+        pattern="[0-9]{3}"
+        maxlength="3"
+        placeholder="***"
+        autocomplete="cc-csc"
+        required
+      >
+
+
+      <button type="submit" id="confirm-payment">Confirmar pago</button>
+      <button type="button" id="cancel-payment" class="btn-cancel">Cancelar pago </button>
+    </form>
+
+  </div>
 </div>
 
+<!-- MODAL CONFIRMACIÓN SALIDA -->
+<div id="confirm-exit-modal" class="confirm-modal">
+  <div class="confirm-box">
+    <h3>¿Salir sin completar la compra?</h3>
+    <p>Perderás los datos introducidos.</p>
 
-
-  <!-- MODAL CHECKOUT -->
-  <div id="checkout-form" class="hidden">
-    <div class="modal-content">
-      <span class="close-button" id="close-checkout" aria-label="Cerrar">&times;</span>
-      <h2>Datos de Facturación</h2>
-      <form id="payment-form">
-        <input id="nombre" name="nombre" placeholder="Nombre completo" required><br>
-        <input id="email" name="email" type="email" placeholder="Email" required><br>
-        <input id="telefono" name="telefono" placeholder="Teléfono" required><br>
-        <input id="direccion" name="direccion" placeholder="Dirección" required><br>
-        <input id="ciudad" name="ciudad" placeholder="Ciudad" required><br>
-        <input id="provincia" name="provincia" placeholder="Provincia" required><br>
-        <input id="codigo-postal" name="codigo-postal" placeholder="Código Postal" required><br>
-        <input id="tarjeta" name="tarjeta" placeholder="Número de tarjeta" required><br>
-        <input id="exp" name="exp" placeholder="MM/AA" required>
-        <span id="exp-error" style="display:none;color:red;">Fecha inválida</span><br>
-        <input id="cvc" name="cvc" placeholder="CVC" required><br>
-        <button type="submit">Pagar</button>
-      </form>
+    <div class="confirm-actions">
+      <button id="confirm-exit-yes" class="confirm-yes">Sí, salir</button>
+      <button id="confirm-exit-no" class="confirm-no">No, continuar</button>
     </div>
   </div>
+</div>
 
-  <!-- OVERLAY -->
-  <div id="modal-overlay" class="modal-overlay hidden"></div>
+
 
 <!-- MODAL USUARIO -->
 <div id="user-modal" class="hidden">
   <div class="user-modal-content" style="background:white; color:rgb(56, 56, 56); padding:20px; border-radius:8px; width:300px; max-width:90%; margin:auto; position:relative;">
     
+    <!-- Botón cerrar -->
     <span id="close-user-modal" class="close-button" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;" aria-label="Cerrar">&times;</span>
 
     <!-- ============================== -->
-    <!--      SECCIÓN LOGIN (NO LOGUEADO) -->
+    <!--      LOGIN (NO LOGUEADO)      -->
     <!-- ============================== -->
     <div id="login-section">
       <h2 style="text-align:center;">Iniciar Sesión</h2>
@@ -214,42 +225,34 @@
       <input type="email" id="login-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
       <input type="password" id="login-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
 
-      <button id="login-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
-        Iniciar sesión
-      </button>
+      <button id="login-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">Iniciar sesión</button>
 
-      <!-- BOTÓN PARA RECUPERAR CONTRASEÑA -->
-      <button id="forgot-password-btn" 
-        style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#f0f0f0;">
+      <button id="forgot-password-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#f0f0f0;">
         ¿Olvidaste tu contraseña?
       </button>
     </div>
 
     <!-- ============================== -->
-    <!--      SECCIÓN REGISTRO (NO LOGUEADO) -->
+    <!--      REGISTRO (NO LOGUEADO)   -->
     <!-- ============================== -->
     <div id="register-section">
       <hr>
-
       <h2 style="text-align:center;">Registrar Usuario</h2>
 
+      <input type="text" id="register-name" placeholder="Nombre" style="width:100%; margin:5px 0; padding:5px;" required>
       <input type="email" id="register-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
       <input type="password" id="register-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
 
-      <button id="register-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
-        Registrar
-      </button>
+      <button id="register-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">Registrar</button>
     </div>
 
     <!-- ============================== -->
-    <!--     SECCIÓN LOGUEADO  -->
+    <!--      OPCIONES LOGUEADO        -->
     <!-- ============================== -->
     <div id="user-options-section" hidden>
-
       <h2 style="text-align:center;">Opciones de Cuenta</h2>
 
-      <button id="logout-inside-modal" 
-              style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#676666; color:white;">
+      <button id="logout-inside-modal" style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#676666; color:white;">
         Cerrar sesión
       </button>
 
@@ -257,18 +260,15 @@
         Modificar usuario
       </button>
 
-      <button id="delete-user-btn" 
-              style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#4b0101; color:white;">
+      <button id="delete-user-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#4b0101; color:white;">
         Eliminar usuario
       </button>
-
     </div>
 
     <!-- ============================== -->
-    <!--  SECCIÓN MODIFICAR USUARIO  -->
+    <!--      MODIFICAR USUARIO        -->
     <!-- ============================== -->
     <section id="gestionUsuarios" hidden style="margin-top: 20px;">
-
       <h2>Modificar Usuario</h2>
 
       <input type="email" id="update-email" placeholder="Nuevo correo" style="width:100%; margin:5px 0; padding:5px;">
@@ -277,11 +277,21 @@
       <button id="update-user-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
         Guardar cambios
       </button>
-
     </section>
-
   </div>
 </div>
+
+<!-- MODAL RECUPERAR CONTRASEÑA -->
+<div id="forgot-modal" class="hidden forgot-modal">
+  <div style="background:white; padding:20px; border-radius:8px; width:300px; margin:auto;">
+    <h3>Recuperar contraseña</h3>
+    <input type="email" id="forgot-email" placeholder="Ingresa tu correo" style="width:100%; padding:5px; margin:5px 0;">
+    <input type="password" id="new-password" placeholder="Nueva contraseña" style="width:100%; padding:5px; margin:5px 0;">
+    <button id="send-recovery-btn" style="width:100%; padding:5px; margin-top:5px;">Cambiar contraseña</button>
+    <button onclick="closeForgotModal()" style="width:100%; padding:5px; margin-top:5px;">Cancelar</button>
+  </div>
+</div>
+
 
 
   <!-- GESTIÓN DE USUARIOS -->
@@ -299,32 +309,6 @@
     </form>
   </section>
 
-    <!-- BOTÓN PARA RECUPERAR CONTRASEÑA -->
-    <button id="forgot-password-btn" 
-      style="width:100%; margin:5px 0; padding:5px; cursor:pointer; background:#f0f0f0;">
-      ¿Olvidaste tu contraseña?
-    </button>
-
-    <hr>
-
-    <h2 style="text-align:center;">Registrar Usuario</h2>
-    <input type="email" id="register-email" placeholder="Correo electrónico" style="width:100%; margin:5px 0; padding:5px;" required>
-    <input type="password" id="register-password" placeholder="Contraseña" style="width:100%; margin:5px 0; padding:5px;" required>
-
-    <button id="register-btn" style="width:100%; margin:5px 0; padding:5px; cursor:pointer;">
-      Registrar
-    </button>
-  
-  </div>
-</div>
-
-<script>
-  // Función al hacer clic en "¿Olvidaste tu contraseña?"
- document.getElementById("forgot-password-btn").addEventListener("click", function() {
-    // Abrir modal de recuperación
-    document.getElementById("forgot-modal").classList.remove("hidden");
-});
-</script>
 
 <!-- MODAL RECUPERAR CONTRASEÑA -->
 <div id="forgot-modal" class="hidden forgot-modal">
@@ -344,6 +328,7 @@
 </div>
 
 
+<div id="toast-container" class="toast-container"></div>
 
 
 

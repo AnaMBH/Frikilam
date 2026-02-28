@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
   {
     nombre: {
       type: String,
-      required: [true, "El nombre es obligatorio"],
+      required: false,
       trim: true,
       minlength: [2, "El nombre debe tener al menos 2 caracteres"]
     },
@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "El email es obligatorio"],
       unique: true,
       lowercase: true,
+      trim: true,
       validate: emailValidator
     },
     password: {

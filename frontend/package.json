@@ -8,9 +8,10 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "dependencies": {},
+  "dependencies": {
+    "toastify-js": "^1.12.0"
+  },
   "devDependencies": {
     "vite": "^4.4.9"
   }
 }
-

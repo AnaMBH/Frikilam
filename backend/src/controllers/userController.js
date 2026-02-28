@@ -8,7 +8,15 @@ import nodemailer from "nodemailer";
 //  REGISTRAR USUARIO
 
 export const registerUser = async (req, res) => {
-  const { nombre, email, password } = req.body;
+  const { nombre, password } = req.body;
+  const email = req.body.email?.trim().toLowerCase();
+
+ 
+
+if (!nombre || !email || !password) {
+  return res.status(400).json({ msg: "Todos los campos son obligatorios" });
+}
+
 
   try {
     // Verificar si ya existe
@@ -29,7 +37,12 @@ export const registerUser = async (req, res) => {
 
     await nuevoUsuario.save();
 
-    res.json({ msg: "Usuario registrado correctamente" });
+    res.status(201).json({
+      id: nuevoUsuario._id,
+      nombre: nuevoUsuario.nombre,
+      email: nuevoUsuario.email
+    });
+
 
   } catch (error) {
     console.log(error);
@@ -59,14 +72,12 @@ export const loginUser = async (req, res) => {
     );
 
     res.json({
-      msg: "Login exitoso",
-      token,
-      usuario: {
-        id: usuario._id,
-        nombre: usuario.nombre,
-        email: usuario.email
-      }
+      _id: usuario._id,
+      nombre: usuario.nombre,
+      email: usuario.email,
+      token
     });
+
 
   } catch (error) {
     console.log(error);
